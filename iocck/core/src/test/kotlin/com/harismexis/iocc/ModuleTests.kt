@@ -1,13 +1,13 @@
 package com.harismexis.iocc
 
 import com.harismexis.iocc.core.DuplicatedDependencyException
-import com.harismexis.iocc.core.ModuleScope
-import com.harismexis.iocc.core.Module
-import com.harismexis.iocc.core.Qualifier
-import com.harismexis.iocc.core.Singleton
-import com.harismexis.iocc.core.ext.module
-import com.harismexis.iocc.core.ext.named
-import com.harismexis.iocc.core.ext.singleton
+import com.harismexis.iocc.core.module.ModuleScope
+import com.harismexis.iocc.core.module.Module
+import com.harismexis.iocc.core.qualifier.Qualifier
+import com.harismexis.iocc.core.provider.Singleton
+import com.harismexis.iocc.core.extensions.module
+import com.harismexis.iocc.core.extensions.named
+import com.harismexis.iocc.core.extensions.singleton
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Test

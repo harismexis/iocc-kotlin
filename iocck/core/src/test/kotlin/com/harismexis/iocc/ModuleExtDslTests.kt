@@ -1,9 +1,9 @@
 package com.harismexis.iocc
 
 import com.harismexis.iocc.core.Parameters
-import com.harismexis.iocc.core.ext.factory
-import com.harismexis.iocc.core.ext.module
-import com.harismexis.iocc.core.ext.singleton
+import com.harismexis.iocc.core.extensions.factory
+import com.harismexis.iocc.core.extensions.module
+import com.harismexis.iocc.core.extensions.singleton
 import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.shouldContain
 import org.junit.Test

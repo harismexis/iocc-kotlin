@@ -1,5 +1,6 @@
 package com.harismexis.iocc.core
 
+import com.harismexis.iocc.core.qualifier.Qualifier
 import java.lang.RuntimeException
 
 class DependencyNotFoundException(qualifier: Qualifier) :

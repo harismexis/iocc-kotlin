@@ -2,4 +2,4 @@ rootProject.name = "iocck"
 
 include ':iocck:core', ':iocck:android'
 
-include ':sample-apps:android-sample-app'
+include ':demo:android-demo'

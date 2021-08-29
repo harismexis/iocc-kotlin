@@ -8,9 +8,9 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.amshove.kluent.shouldNotBeNull
 import org.junit.Test
-import com.harismexis.iocc.android.ext.viewModel
-import com.harismexis.iocc.core.ext.component
-import com.harismexis.iocc.core.ext.module
+import com.harismexis.iocc.android.extensions.viewModel
+import com.harismexis.iocc.core.extensions.component
+import com.harismexis.iocc.core.extensions.module
 
 class ViewModelProviderTests {
 

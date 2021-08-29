@@ -3,9 +3,9 @@ package com.harismexis.iocc.android
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.harismexis.iocc.core.ModuleScope
+import com.harismexis.iocc.core.module.ModuleScope
 import com.harismexis.iocc.core.Parameters
-import com.harismexis.iocc.core.Provider
+import com.harismexis.iocc.core.provider.Provider
 
 typealias ViewModelInstanceFactory<T> = ModuleScope.(ViewModelParameters) -> T
 

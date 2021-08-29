@@ -1,8 +1,8 @@
 package com.harismexis.iocc
 
-import com.harismexis.iocc.core.Factory
-import com.harismexis.iocc.core.Module
-import com.harismexis.iocc.core.Singleton
+import com.harismexis.iocc.core.provider.Factory
+import com.harismexis.iocc.core.module.Module
+import com.harismexis.iocc.core.provider.Singleton
 import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should not be equal to`
 import org.junit.Test
