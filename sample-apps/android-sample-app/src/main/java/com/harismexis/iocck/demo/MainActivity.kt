@@ -1,12 +1,12 @@
-package com.bapps.kioc.sampleapp
+package com.harismexis.iocck.demo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.harismexis.iocc.android.ext.lazyInjection
 import com.harismexis.iocc.android.ext.lazyViewModel
-import com.bapps.kioc.sampleapp.databinding.ActivityMainBinding
 import com.harismexis.iocc.core.Parameters
+import com.harismexis.iocck.demo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

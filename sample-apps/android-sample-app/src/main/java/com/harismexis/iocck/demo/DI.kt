@@ -1,4 +1,4 @@
-package com.bapps.kioc.sampleapp
+package com.harismexis.iocck.demo
 
 import com.harismexis.iocc.android.ext.viewModel
 import com.harismexis.iocc.core.ext.component

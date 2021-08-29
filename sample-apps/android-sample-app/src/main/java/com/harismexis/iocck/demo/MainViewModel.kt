@@ -1,4 +1,4 @@
-package com.bapps.kioc.sampleapp
+package com.harismexis.iocck.demo
 
 import androidx.lifecycle.ViewModel
 

@@ -1,5 +1,5 @@
-rootProject.name = "iocc"
+rootProject.name = "iocck"
 
-include ':kioc:core', ':kioc:androidx'
+include ':iocck:core', ':iocck:android'
 
 include ':sample-apps:android-sample-app'

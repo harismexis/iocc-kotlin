@@ -1,4 +1,4 @@
-package com.bapps.kioc.androidx
+package com.harismexis.iocc.android
 
 import androidx.lifecycle.ViewModel
 

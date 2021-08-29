@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="singleton"
-            type="com.bapps.kioc.sampleapp.SimpleClass" />
+            type="com.harismexis.iocck.demo.SimpleClass" />
 
         <variable
             name="factory"
-            type="com.bapps.kioc.sampleapp.ComplexClass" />
+            type="com.harismexis.iocck.demo.ComplexClass" />
 
         <variable
             name="viewModel"
-            type="com.bapps.kioc.sampleapp.MainViewModel" />
+            type="com.harismexis.iocck.demo.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
