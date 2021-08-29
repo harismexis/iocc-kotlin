@@ -1,0 +1,5 @@
+rootProject.name = "iocc"
+
+include ':kioc:core', ':kioc:androidx'
+
+include ':sample-apps:android-sample-app'
