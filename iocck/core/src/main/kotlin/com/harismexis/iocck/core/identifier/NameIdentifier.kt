@@ -1,4 +1,4 @@
-package com.harismexis.iocck.core.qualifier
+package com.harismexis.iocck.core.identifier
 
 class NameIdentifier(name: String) : Identifier {
     override val value = name

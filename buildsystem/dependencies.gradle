@@ -40,7 +40,6 @@ ext {
             junit           : "androidx.test.ext:junit:$androidx_junit",
             core_testing    : "androidx.arch.core:core-testing:$arch_core",
             mockk           : "io.mockk:mockk:$mockk",
-            kotlin_test_junit : "org.jetbrains.kotlin:kotlin-test-junit:$kotlin"
     ]
 
     androidTestLibraries = [
@@ -48,7 +47,6 @@ ext {
             junit                  : "androidx.test.ext:junit:$androidx_junit",
             espresso_core          : "androidx.test.espresso:espresso-core:$espresso",
             espresso_contrib       : "androidx.test.espresso:espresso-contrib:$espresso",
-            mockk_android          : "io.mockk:mockk-android:$mockk"
     ]
 
 }

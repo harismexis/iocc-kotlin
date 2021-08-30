@@ -1,8 +1,6 @@
 package com.harismexis.iocck.core
 
-import java.lang.RuntimeException
-
-open class Parameters(val parameters: Array<out Any>) {
+open class Args(val parameters: Array<out Any>) {
 
     inline operator fun <reified T> component1(): T = requireAt(0)
     inline operator fun <reified T> component2(): T = requireAt(1)
@@ -10,12 +8,12 @@ open class Parameters(val parameters: Array<out Any>) {
     inline operator fun <reified T> component4(): T = requireAt(3)
     inline operator fun <reified T> component5(): T = requireAt(4)
 
-    inline fun <reified T> requireAt(index: Int) = parameters.elementAt(index) as? T ?: throw ParameterNotDefinedException()
+    inline fun <reified T> requireAt(index: Int) = parameters.elementAt(index) as? T
+        ?: throw UnknownArgException()
 
     companion object {
-        val EMPTY = Parameters(emptyArray())
-        fun of(vararg parameters: Any) = Parameters(parameters)
+        val EMPTY = Args(emptyArray())
+        fun of(vararg parameters: Any) = Args(parameters)
     }
 }
 
-class ParameterNotDefinedException : RuntimeException("Parameter not defined")

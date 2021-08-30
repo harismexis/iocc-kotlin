@@ -1,4 +1,4 @@
-package com.harismexis.iocck.core.qualifier
+package com.harismexis.iocck.core.identifier
 
 import kotlin.reflect.KClass
 

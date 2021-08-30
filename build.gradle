@@ -2,8 +2,6 @@ buildscript {
 
     apply from: 'buildsystem/dependencies.gradle'
 
-    ext.kioc_version = "0.1.2-SNAPSHOT"
-
     repositories {
         google()
         mavenCentral()

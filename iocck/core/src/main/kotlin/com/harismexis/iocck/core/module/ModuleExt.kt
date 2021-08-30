@@ -3,7 +3,7 @@ package com.harismexis.iocck.core.module
 import com.harismexis.iocck.core.provider.Factory
 import com.harismexis.iocck.core.provider.InstanceFactory
 import com.harismexis.iocck.core.provider.Singleton
-import com.harismexis.iocck.core.qualifier.Identifier
+import com.harismexis.iocck.core.identifier.Identifier
 
 inline fun <reified T> Module.singleton(identifier: Identifier, noinline instanceFactory: InstanceFactory<T>) {
     register(identifier, Singleton(ModuleScope(this), instanceFactory))

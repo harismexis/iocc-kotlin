@@ -1,6 +1,6 @@
 package com.harismexis.iocck
 
-import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.Args
 import com.harismexis.iocck.core.module.factory
 import com.harismexis.iocck.core.module.module
 import com.harismexis.iocck.core.module.singleton
@@ -80,7 +80,7 @@ class ModuleExtTest {
         // when
         val vehicle = module
             .require<Vehicle>()
-            .get(Parameters.of(expectedWheelsValue))
+            .get(Args.of(expectedWheelsValue))
 
         // then
         Assert.assertEquals(vehicle.wheels, expectedWheelsValue)

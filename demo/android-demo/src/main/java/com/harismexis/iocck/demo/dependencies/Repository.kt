@@ -1,7 +1,7 @@
 package com.harismexis.iocck.demo.dependencies
 
-class AlwaysSame {
+class Repository {
     override fun toString(): String {
-        return "AlwaysSame hash: ${hashCode()}"
+        return "Repository hash code: ${hashCode()}"
     }
 }

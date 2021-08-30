@@ -1,6 +1,6 @@
 package com.harismexis.iocck
 
-import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.Args
 import com.harismexis.iocck.core.container.buildContainer
 import com.harismexis.iocck.core.module.factory
 import com.harismexis.iocck.core.module.module
@@ -24,7 +24,7 @@ class ContainerTest {
         }
         val garageModule = module(dependsOn = arrayOf(landVehiclesModule, seaVehiclesModule)) {
             factory {
-                val car: Car = get(Parameters.of(garageCarWheels))
+                val car: Car = get(Args.of(garageCarWheels))
                 val bike: Bike = get()
                 val boat: Boat = get()
                 Garage(listOf(car, bike, boat))
@@ -35,7 +35,7 @@ class ContainerTest {
         val component = buildContainer {
             withModule(garageModule)
         }
-        val car: Car = component.get(Parameters.of(expectedCarWheels))
+        val car: Car = component.get(Args.of(expectedCarWheels))
         val bike: Bike = component.get()
         val boat: Boat = component.get()
         val garage: Garage = component.get()

@@ -1,11 +1,11 @@
 package com.harismexis.iocck.core.container
 
 import com.harismexis.iocck.core.DependencyNotFoundException
-import com.harismexis.iocck.core.DuplicatedDependencyException
-import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.DependencyConflictException
+import com.harismexis.iocck.core.Args
 import com.harismexis.iocck.core.module.Module
-import com.harismexis.iocck.core.qualifier.Identifier
-import com.harismexis.iocck.core.qualifier.TypeIdentifier
+import com.harismexis.iocck.core.identifier.Identifier
+import com.harismexis.iocck.core.identifier.TypeIdentifier
 
 class Container(private val modules: List<Module>) {
 
@@ -25,19 +25,19 @@ class Container(private val modules: List<Module>) {
         fun build() = Container(modules)
     }
 
-    fun <T> get(identifier: Identifier, parameters: Parameters = Parameters.EMPTY): T {
+    fun <T> get(identifier: Identifier, args: Args = Args.EMPTY): T {
         val found = modules.mapNotNull { it.get<T>(identifier) }
-        if (found.size > 1) throw DuplicatedDependencyException(identifier)
+        if (found.size > 1) throw DependencyConflictException(identifier)
         val provider = found.firstOrNull() ?: throw DependencyNotFoundException(identifier)
-        return provider.get(parameters)
+        return provider.get(args)
     }
 
-    inline fun <reified T> get(parameters: Parameters = Parameters.EMPTY) =
-        get<T>(TypeIdentifier(T::class), parameters)
+    inline fun <reified T> get(args: Args = Args.EMPTY) =
+        get<T>(TypeIdentifier(T::class), args)
 
-    fun <T> lazyInjection(identifier: Identifier, parameters: Parameters = Parameters.EMPTY) =
-        lazy { get<T>(identifier, parameters) }
+    fun <T> lazyInjection(identifier: Identifier, args: Args = Args.EMPTY) =
+        lazy { get<T>(identifier, args) }
 
-    inline fun <reified T> lazyInjection(parameters: Parameters = Parameters.EMPTY) =
-        lazy { get<T>(TypeIdentifier(T::class), parameters) }
+    inline fun <reified T> lazyInjection(args: Args = Args.EMPTY) =
+        lazy { get<T>(TypeIdentifier(T::class), args) }
 }

@@ -1,13 +1,13 @@
 package com.harismexis.iocck
 
-import com.harismexis.iocck.core.DuplicatedDependencyException
+import com.harismexis.iocck.core.DependencyConflictException
 import com.harismexis.iocck.core.module.ModuleScope
 import com.harismexis.iocck.core.module.Module
-import com.harismexis.iocck.core.qualifier.Identifier
+import com.harismexis.iocck.core.identifier.Identifier
 import com.harismexis.iocck.core.provider.Singleton
 import com.harismexis.iocck.core.module.module
 import com.harismexis.iocck.core.module.singleton
-import com.harismexis.iocck.core.qualifier.NameIdentifier
+import com.harismexis.iocck.core.identifier.NameIdentifier
 import org.junit.Assert
 import org.junit.Test
 
@@ -32,7 +32,7 @@ class ModuleTest {
         Assert.assertEquals(module.require<Car>().get(), secondCar)
     }
 
-    @Test(expected = DuplicatedDependencyException::class)
+    @Test(expected = DependencyConflictException::class)
     fun `Module should throw exception on second registration of the same type`() {
         // given
         val module = Module()

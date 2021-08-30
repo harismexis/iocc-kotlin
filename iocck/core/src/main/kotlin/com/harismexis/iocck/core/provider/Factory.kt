@@ -1,6 +1,6 @@
 package com.harismexis.iocck.core.provider
 
-import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.Args
 import com.harismexis.iocck.core.module.ModuleScope
 
 class Factory<T>(
@@ -8,8 +8,8 @@ class Factory<T>(
     private val factory: InstanceFactory<T>
 ) : Provider<T> {
 
-    override fun get(parameters: Parameters): T {
-        return factory(moduleScope, parameters)
+    override fun get(args: Args): T {
+        return factory(moduleScope, args)
     }
 
 }
