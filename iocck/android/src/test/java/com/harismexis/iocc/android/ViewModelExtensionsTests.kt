@@ -7,20 +7,20 @@ import com.harismexis.iocc.android.extensions.lazyViewModel
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.amshove.kluent.shouldNotBeNull
 import org.junit.Test
 import com.harismexis.iocc.android.extensions.viewModel
-import com.harismexis.iocc.core.container.Container
-import com.harismexis.iocc.core.container.HasContainer
-import com.harismexis.iocc.core.extensions.component
-import com.harismexis.iocc.core.extensions.module
+import com.harismexis.iocck.core.container.Container
+import com.harismexis.iocck.core.container.HasContainer
+import com.harismexis.iocck.core.container.buildContainer
+import com.harismexis.iocck.core.container.module
+import org.junit.Assert
 
 class ViewModelExtensionsTests {
 
     @Test
     fun `ViewModel lazy injection should return instance when reference will be called`() {
-        // arrange
-        val component = component {
+        // given
+        val component = buildContainer {
             module {
                 viewModel { TestViewModel() }
             }
@@ -30,15 +30,14 @@ class ViewModelExtensionsTests {
             every { applicationContext } returns ApplicationMock(component)
         }
 
-
-        // act
+        // when
         val testViewModel1: TestViewModel by activityMock.lazyViewModel()
         val testViewModel2: TestViewModel by activityMock.lazyViewModel()
 
-        // assert
+        // then
         verify(exactly = 0) { activityMock.viewModelStore }
-        testViewModel1.shouldNotBeNull()
-        testViewModel2.shouldNotBeNull()
+        Assert.assertNotNull(testViewModel1)
+        Assert.assertNotNull(testViewModel2)
         verify(exactly = 2) { activityMock.viewModelStore }
     }
 }

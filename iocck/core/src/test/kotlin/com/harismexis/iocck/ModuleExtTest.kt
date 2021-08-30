@@ -1,23 +1,22 @@
-package com.harismexis.iocc
+package com.harismexis.iocck
 
-import com.harismexis.iocc.core.Parameters
-import com.harismexis.iocc.core.extensions.factory
-import com.harismexis.iocc.core.extensions.module
-import com.harismexis.iocc.core.extensions.singleton
-import org.amshove.kluent.`should be equal to`
-import org.amshove.kluent.shouldContain
+import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.module.factory
+import com.harismexis.iocck.core.module.module
+import com.harismexis.iocck.core.module.singleton
+import org.junit.Assert
 import org.junit.Test
 
-class ModuleExtDslTests {
+class ModuleExtTest {
 
     @Test
     fun `Related dependencies should be available during registration`() {
-        // arrange
+        // given
         val car = Car()
         val bike = Bike()
         val boat = Boat()
 
-        // act
+        // when
         val module = module {
             singleton { car }
             singleton { bike }
@@ -34,19 +33,19 @@ class ModuleExtDslTests {
             .require<Garage>()
             .get()
 
-        // assert
-        garage.vehicles shouldContain car
-        garage.vehicles shouldContain bike
-        garage.vehicles shouldContain boat
+        // then
+        Assert.assertTrue(garage.vehicles.contains(car))
+        Assert.assertTrue(garage.vehicles.contains(bike))
+        Assert.assertTrue(garage.vehicles.contains(boat))
     }
 
     @Test
     fun `Related modules should be used to return dependency`() {
-        // arrange
+        // given
         val car = Car()
         val bike = Bike()
 
-        // act
+        // when
         val vehiclesModule = module {
             singleton { car }
             singleton { bike }
@@ -63,14 +62,14 @@ class ModuleExtDslTests {
             .require<Garage>()
             .get()
 
-        // assert
-        garage.vehicles shouldContain car
-        garage.vehicles shouldContain bike
+        // then
+        Assert.assertTrue(garage.vehicles.contains(car))
+        Assert.assertTrue(garage.vehicles.contains(bike))
     }
 
     @Test
     fun `Provider parameters should be used to create dependency`() {
-        // arrange
+        // given
         val expectedWheelsValue = 10
         val module = module {
             factory<Vehicle> { (wheels: Int) ->
@@ -78,12 +77,12 @@ class ModuleExtDslTests {
             }
         }
 
-        // act
+        // when
         val vehicle = module
             .require<Vehicle>()
             .get(Parameters.of(expectedWheelsValue))
 
-        // assert
-        vehicle.wheels `should be equal to` expectedWheelsValue
+        // then
+        Assert.assertEquals(vehicle.wheels, expectedWheelsValue)
     }
 }

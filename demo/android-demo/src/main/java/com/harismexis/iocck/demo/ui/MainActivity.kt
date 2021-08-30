@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.harismexis.iocc.android.extensions.lazyInjection
 import com.harismexis.iocc.android.extensions.lazyViewModel
-import com.harismexis.iocc.core.Parameters
+import com.harismexis.iocck.core.Parameters
 import com.harismexis.iocck.demo.R
 import com.harismexis.iocck.demo.databinding.ActivityMainBinding
 import com.harismexis.iocck.demo.dependencies.AlwaysNew

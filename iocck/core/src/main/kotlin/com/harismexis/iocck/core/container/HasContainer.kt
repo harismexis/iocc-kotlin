@@ -1,5 +1,6 @@
-package com.harismexis.iocc.core.container
+package com.harismexis.iocck.core.container
 
 interface HasContainer {
     val container: Container
 }
+

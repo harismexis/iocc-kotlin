@@ -1,40 +1,39 @@
-package com.harismexis.iocc
+package com.harismexis.iocck
 
-import com.harismexis.iocc.core.provider.Factory
-import com.harismexis.iocc.core.module.Module
-import com.harismexis.iocc.core.provider.Singleton
-import org.amshove.kluent.`should be equal to`
-import org.amshove.kluent.`should not be equal to`
+import com.harismexis.iocck.core.provider.Factory
+import com.harismexis.iocck.core.module.Module
+import com.harismexis.iocck.core.provider.Singleton
+import org.junit.Assert
 import org.junit.Test
 
 class ProvidersTests {
 
     @Test
     fun `Single provider should always return the same value`() {
-        // arrange
+        // given
         val module = Module()
         val provider = Singleton(module.scope()) { SampleStruct(3, "abcd") }
 
-        // act
+        // when
         val instanceA = provider.get()
         val instanceB = provider.get()
 
-        // assert
-        instanceA `should be equal to` instanceB
+        // then
+        Assert.assertEquals(instanceA, instanceB)
     }
 
     @Test
     fun `Factory provider should always return new value`() {
-        // arrange
+        // given
         val module = Module()
         val provider = Factory(module.scope()) { SampleStruct(3, "abcd") }
 
-        // act
+        // when
         val instanceA = provider.get()
         val instanceB = provider.get()
 
-        // assert
-        instanceA `should not be equal to` instanceB
+        // then
+        Assert.assertNotEquals(instanceA, instanceB)
     }
 }
 

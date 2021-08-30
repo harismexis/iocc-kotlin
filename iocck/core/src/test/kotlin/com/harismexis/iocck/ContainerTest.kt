@@ -1,19 +1,18 @@
-package com.harismexis.iocc
+package com.harismexis.iocck
 
-import com.harismexis.iocc.core.Parameters
-import com.harismexis.iocc.core.extensions.component
-import com.harismexis.iocc.core.extensions.factory
-import com.harismexis.iocc.core.extensions.module
-import com.harismexis.iocc.core.extensions.singleton
-import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeNull
+import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.container.buildContainer
+import com.harismexis.iocck.core.module.factory
+import com.harismexis.iocck.core.module.module
+import com.harismexis.iocck.core.module.singleton
+import org.junit.Assert
 import org.junit.Test
 
-class ContainerTests {
+class ContainerTest {
 
     @Test
     fun `Component should use all modules to find dependency`() {
-        // arrange
+        // given
         val expectedCarWheels = 5
         val garageCarWheels = 10
         val landVehiclesModule = module {
@@ -28,27 +27,24 @@ class ContainerTests {
                 val car: Car = get(Parameters.of(garageCarWheels))
                 val bike: Bike = get()
                 val boat: Boat = get()
-
                 Garage(listOf(car, bike, boat))
             }
         }
 
-        // act
-        val component = component {
+        // when
+        val component = buildContainer {
             withModule(garageModule)
         }
-
         val car: Car = component.get(Parameters.of(expectedCarWheels))
         val bike: Bike = component.get()
         val boat: Boat = component.get()
-
         val garage: Garage = component.get()
 
-        // assert
-        car.shouldNotBeNull()
-        car.wheels shouldBeEqualTo expectedCarWheels
-        bike.shouldNotBeNull()
-        boat.shouldNotBeNull()
-        garage.vehicles.first().wheels shouldBeEqualTo garageCarWheels
+        // then
+        Assert.assertNotNull(car)
+        Assert.assertEquals(car.wheels, expectedCarWheels)
+        Assert.assertNotNull(bike)
+        Assert.assertNotNull(boat)
+        Assert.assertEquals(garage.vehicles.first().wheels, garageCarWheels)
     }
 }

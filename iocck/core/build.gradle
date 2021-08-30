@@ -3,15 +3,15 @@ plugins {
     id 'kotlin'
 }
 
+apply from: '../../buildsystem/dependencies.gradle'
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation libraries.kotlin
 
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.amshove.kluent:kluent:1.65'
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation testLibraries.junit
 }

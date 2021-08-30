@@ -1,13 +1,12 @@
-package com.harismexis.iocc.core.provider
+package com.harismexis.iocck.core.provider
 
-import com.harismexis.iocc.core.Parameters
-import com.harismexis.iocc.core.module.ModuleScope
+import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.module.ModuleScope
 
 class Singleton<T>(
     private val moduleScope: ModuleScope,
     private val factory: InstanceFactory<T>
-) :
-    Provider<T> {
+) : Provider<T> {
 
     private var instance: T? = null
 

@@ -1,10 +1,10 @@
 package com.harismexis.iocck.demo.di
 
 import com.harismexis.iocc.android.extensions.viewModel
-import com.harismexis.iocc.core.extensions.component
-import com.harismexis.iocc.core.extensions.factory
-import com.harismexis.iocc.core.extensions.module
-import com.harismexis.iocc.core.extensions.singleton
+import com.harismexis.iocck.core.container.buildContainer
+import com.harismexis.iocck.core.module.factory
+import com.harismexis.iocck.core.module.module
+import com.harismexis.iocck.core.module.singleton
 import com.harismexis.iocck.demo.ui.MainViewModel
 import com.harismexis.iocck.demo.dependencies.AlwaysNew
 import com.harismexis.iocck.demo.dependencies.AlwaysSame
@@ -19,7 +19,7 @@ object Injector {
         }
     }
 
-    val container = component {
+    val container = buildContainer {
         withModule(mainModule)
     }
 }

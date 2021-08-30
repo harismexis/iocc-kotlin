@@ -1,13 +1,13 @@
-package com.harismexis.iocc.core.qualifier
+package com.harismexis.iocck.core.qualifier
 
 import kotlin.reflect.KClass
 
-class TypeQualifier(clazz: KClass<*>) : Qualifier {
+class TypeIdentifier(clazz: KClass<*>) : Identifier {
     override val value = clazz.simpleName!!
 
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is Qualifier -> equals(other)
+            is Identifier -> equals(other)
             else -> false
         }
     }
@@ -16,9 +16,9 @@ class TypeQualifier(clazz: KClass<*>) : Qualifier {
         return value.hashCode()
     }
 
-    fun equals(qualifier: Qualifier): Boolean {
-        return when (qualifier) {
-            is TypeQualifier -> value == qualifier.value
+    fun equals(identifier: Identifier): Boolean {
+        return when (identifier) {
+            is TypeIdentifier -> value == identifier.value
             else -> false
         }
     }

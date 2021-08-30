@@ -1,11 +1,11 @@
-package com.harismexis.iocc.core.qualifier
+package com.harismexis.iocck.core.qualifier
 
-class NameQualifier(name: String) : Qualifier {
+class NameIdentifier(name: String) : Identifier {
     override val value = name
 
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is Qualifier -> equals(other)
+            is Identifier -> equals(other)
             else -> false
         }
     }
@@ -14,9 +14,9 @@ class NameQualifier(name: String) : Qualifier {
         return value.hashCode()
     }
 
-    fun equals(qualifier: Qualifier): Boolean {
-        return when (qualifier) {
-            is NameQualifier -> value == qualifier.value
+    fun equals(identifier: Identifier): Boolean {
+        return when (identifier) {
+            is NameIdentifier -> value == identifier.value
             else -> false
         }
     }

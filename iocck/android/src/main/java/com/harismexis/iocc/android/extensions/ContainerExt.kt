@@ -6,11 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import com.harismexis.iocc.android.ViewModelParameters
-import com.harismexis.iocc.core.*
-import com.harismexis.iocc.core.container.Container
-import com.harismexis.iocc.core.container.HasContainer
-import com.harismexis.iocc.core.qualifier.Qualifier
-import com.harismexis.iocc.core.qualifier.TypeQualifier
+import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.container.Container
+import com.harismexis.iocck.core.container.HasContainer
+import com.harismexis.iocck.core.qualifier.Identifier
+import com.harismexis.iocck.core.qualifier.TypeIdentifier
 
 inline fun <reified T : ViewModel> Fragment.lazyViewModel(parameters: Parameters = Parameters.EMPTY): Lazy<T> = lazy { viewModel(parameters) }
 inline fun <reified T : ViewModel> ComponentActivity.lazyViewModel(parameters: Parameters = Parameters.EMPTY): Lazy<T> = lazy { viewModel(parameters) }
@@ -36,44 +36,44 @@ inline fun <reified T : ViewModel> Container.viewModel(viewModelStoreOwner: View
 }
 
 inline fun <reified T> Fragment.get(parameters: Parameters = Parameters.EMPTY): T = get(
-    TypeQualifier(T::class), parameters)
+    TypeIdentifier(T::class), parameters)
 inline fun <reified T> Activity.get(parameters: Parameters = Parameters.EMPTY): T = get(
-    TypeQualifier(T::class), parameters)
+    TypeIdentifier(T::class), parameters)
 
-fun <T> Fragment.get(qualifier: Qualifier, parameters: Parameters = Parameters.EMPTY): T {
+fun <T> Fragment.get(identifier: Identifier, parameters: Parameters = Parameters.EMPTY): T {
     return when (this) {
-        is HasContainer -> container.get(qualifier, parameters)
-        else -> requireActivity().get(qualifier, parameters)
+        is HasContainer -> container.get(identifier, parameters)
+        else -> requireActivity().get(identifier, parameters)
     }
 }
 
-fun <T> Activity.get(qualifier: Qualifier, parameters: Parameters = Parameters.EMPTY): T {
+fun <T> Activity.get(identifier: Identifier, parameters: Parameters = Parameters.EMPTY): T {
     val provider: HasContainer = when {
         this is HasContainer -> this
         applicationContext is HasContainer -> applicationContext as HasContainer
         else -> throw ComponentProviderNotDefinedException()
     }
-    return provider.container.get(qualifier, parameters)
+    return provider.container.get(identifier, parameters)
 }
 
 inline fun <reified T> Fragment.lazyInjection(parameters: Parameters = Parameters.EMPTY): Lazy<T> =
-    lazyInjection(TypeQualifier(T::class), parameters)
+    lazyInjection(TypeIdentifier(T::class), parameters)
 
 inline fun <reified T> Activity.lazyInjection(parameters: Parameters = Parameters.EMPTY): Lazy<T> =
-    lazyInjection(TypeQualifier(T::class), parameters)
+    lazyInjection(TypeIdentifier(T::class), parameters)
 
 fun <T> Fragment.lazyInjection(
-    qualifier: Qualifier,
+    identifier: Identifier,
     parameters: Parameters = Parameters.EMPTY
 ): Lazy<T> = lazy {
     when (this) {
-        is HasContainer -> container.get(qualifier, parameters)
-        else -> requireActivity().get(qualifier, parameters)
+        is HasContainer -> container.get(identifier, parameters)
+        else -> requireActivity().get(identifier, parameters)
     }
 }
 
 fun <T> Activity.lazyInjection(
-    qualifier: Qualifier,
+    identifier: Identifier,
     parameters: Parameters = Parameters.EMPTY
 ): Lazy<T> = lazy {
     val provider: HasContainer = when {
@@ -81,7 +81,7 @@ fun <T> Activity.lazyInjection(
         applicationContext is HasContainer -> applicationContext as HasContainer
         else -> throw ComponentProviderNotDefinedException()
     }
-    provider.container.get(qualifier, parameters)
+    provider.container.get(identifier, parameters)
 }
 
 class ComponentProviderNotDefinedException :

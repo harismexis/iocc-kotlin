@@ -1,4 +1,4 @@
-package com.harismexis.iocc
+package com.harismexis.iocck
 
 interface Vehicle {
     val wheels: Int

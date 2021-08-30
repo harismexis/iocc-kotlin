@@ -1,7 +1,7 @@
-package com.harismexis.iocc.core.provider
+package com.harismexis.iocck.core.provider
 
-import com.harismexis.iocc.core.Parameters
-import com.harismexis.iocc.core.module.ModuleScope
+import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.module.ModuleScope
 
 typealias InstanceFactory<T> = ModuleScope.(Parameters) -> T
 

@@ -3,13 +3,16 @@ package com.harismexis.iocc.android
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.harismexis.iocc.core.module.ModuleScope
-import com.harismexis.iocc.core.Parameters
-import com.harismexis.iocc.core.provider.Provider
+import com.harismexis.iocck.core.module.ModuleScope
+import com.harismexis.iocck.core.Parameters
+import com.harismexis.iocck.core.provider.Provider
 
 typealias ViewModelInstanceFactory<T> = ModuleScope.(ViewModelParameters) -> T
 
-class ViewModelParameters(val viewModelStoreOwner: ViewModelStoreOwner, parameters: Array<Any>) : Parameters(parameters)
+class ViewModelParameters(
+    val viewModelStoreOwner: ViewModelStoreOwner,
+    parameters: Array<Any>
+) : Parameters(parameters)
 
 class ViewModelDependencyProvider<T : ViewModel>(
     private val moduleScope: ModuleScope,
@@ -17,7 +20,8 @@ class ViewModelDependencyProvider<T : ViewModel>(
 ) : Provider<T> {
 
     override fun get(parameters: Parameters): T {
-        val viewModelParameters = parameters as? ViewModelParameters ?: throw ViewModelParametersExpectedException()
+        val viewModelParameters =
+            parameters as? ViewModelParameters ?: throw ViewModelParametersExpectedException()
         val factory = ViewModelFactory(moduleScope, instanceFactory, viewModelParameters)
         return ViewModelProvider(viewModelParameters.viewModelStoreOwner, factory)
             .get(ViewModelHolder::class.java)
@@ -38,4 +42,5 @@ private class ViewModelFactory<T : ViewModel>(
 
 private class ViewModelHolder(val nestedViewModel: ViewModel) : ViewModel()
 
-class ViewModelParametersExpectedException : RuntimeException("Passed parameters are not ViewModelParameters type")
+class ViewModelParametersExpectedException :
+    RuntimeException("Passed parameters are not ViewModelParameters type")
