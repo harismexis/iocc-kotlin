@@ -1,5 +1,5 @@
 package com.harismexis.iocck.core.identifier
 
 interface Identifier {
-    val value: String
+    val id: String
 }

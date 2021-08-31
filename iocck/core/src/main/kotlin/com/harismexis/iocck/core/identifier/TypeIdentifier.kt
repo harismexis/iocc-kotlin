@@ -2,8 +2,8 @@ package com.harismexis.iocck.core.identifier
 
 import kotlin.reflect.KClass
 
-class TypeIdentifier(clazz: KClass<*>) : Identifier {
-    override val value = clazz.simpleName!!
+class TypeIdentifier(kClass: KClass<*>) : Identifier {
+    override val id = kClass.simpleName!!
 
     override fun equals(other: Any?): Boolean {
         return when (other) {
@@ -13,17 +13,17 @@ class TypeIdentifier(clazz: KClass<*>) : Identifier {
     }
 
     override fun hashCode(): Int {
-        return value.hashCode()
+        return id.hashCode()
     }
 
     fun equals(identifier: Identifier): Boolean {
         return when (identifier) {
-            is TypeIdentifier -> value == identifier.value
+            is TypeIdentifier -> id == identifier.id
             else -> false
         }
     }
 
     override fun toString(): String {
-        return "${javaClass.simpleName}[$value]"
+        return "${javaClass.simpleName}[$id]"
     }
 }

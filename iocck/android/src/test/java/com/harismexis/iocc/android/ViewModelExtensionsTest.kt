@@ -3,41 +3,42 @@ package com.harismexis.iocc.android
 import android.app.Application
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.ViewModelStore
-import com.harismexis.iocc.android.extensions.lazyViewModel
+import com.harismexis.iocc.android.extensions.lazyGetVm
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test
-import com.harismexis.iocc.android.extensions.viewModel
+import com.harismexis.iocc.android.extensions.getVm
 import com.harismexis.iocck.core.container.Container
 import com.harismexis.iocck.core.container.HasContainer
 import com.harismexis.iocck.core.container.buildContainer
 import com.harismexis.iocck.core.container.module
 import org.junit.Assert
 
-class ViewModelExtensionsTests {
+class ViewModelExtensionsTest {
 
     @Test
     fun `ViewModel lazy injection should return instance when reference will be called`() {
         // given
-        val component = buildContainer {
+        val container = buildContainer {
             module {
-                viewModel { TestViewModel() }
+                getVm { Vm() }
             }
         }
+
         val activityMock: ComponentActivity = mockk {
             every { viewModelStore } returns ViewModelStore()
-            every { applicationContext } returns ApplicationMock(component)
+            every { applicationContext } returns ApplicationMock(container)
         }
 
         // when
-        val testViewModel1: TestViewModel by activityMock.lazyViewModel()
-        val testViewModel2: TestViewModel by activityMock.lazyViewModel()
+        val vm1: Vm by activityMock.lazyGetVm()
+        val vm2: Vm by activityMock.lazyGetVm()
 
         // then
         verify(exactly = 0) { activityMock.viewModelStore }
-        Assert.assertNotNull(testViewModel1)
-        Assert.assertNotNull(testViewModel2)
+        Assert.assertNotNull(vm1)
+        Assert.assertNotNull(vm2)
         verify(exactly = 2) { activityMock.viewModelStore }
     }
 }

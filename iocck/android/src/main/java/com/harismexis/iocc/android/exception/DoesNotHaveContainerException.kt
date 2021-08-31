@@ -1,4 +1,4 @@
 package com.harismexis.iocc.android.exception
 
-class HasContainerNotImplementedException :
+class DoesNotHaveContainerException :
     Exception("Does not implement HasContainer")

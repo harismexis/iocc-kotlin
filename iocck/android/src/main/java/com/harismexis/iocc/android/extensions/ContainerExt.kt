@@ -6,9 +6,9 @@ import com.harismexis.iocc.android.viewmodel.ViewModelArgs
 import com.harismexis.iocck.core.Args
 import com.harismexis.iocck.core.container.Container
 
-inline fun <reified T : ViewModel> Container.viewModel(
+inline fun <reified T : ViewModel> Container.getVm(
     viewModelStoreOwner: ViewModelStoreOwner,
     args: Args = Args.EMPTY
 ): T {
-    return get(ViewModelArgs(viewModelStoreOwner, args.parameters.toList().toTypedArray()))
+    return get(ViewModelArgs(viewModelStoreOwner, args.args.toList().toTypedArray()))
 }

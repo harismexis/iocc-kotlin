@@ -14,29 +14,25 @@ fun <T> Fragment.get(identifier: Identifier, args: Args = Args.EMPTY): T {
     }
 }
 
-fun <T> Fragment.lazyInjection(
+fun <T> Fragment.lazyGet(
     identifier: Identifier,
     args: Args = Args.EMPTY
 ): Lazy<T> = lazy {
-    when (this) {
-        is HasContainer -> container.get(identifier, args)
-        else -> requireActivity().get(identifier, args)
-    }
+    get(identifier, args)
 }
 
-inline fun <reified T> Fragment.get(args: Args = Args.EMPTY): T = get(
-    TypeIdentifier(T::class), args
-)
+inline fun <reified T> Fragment.get(args: Args = Args.EMPTY): T =
+    get(TypeIdentifier(T::class), args)
 
-inline fun <reified T> Fragment.lazyInjection(args: Args = Args.EMPTY): Lazy<T> =
-    lazyInjection(TypeIdentifier(T::class), args)
+inline fun <reified T> Fragment.lazyGet(args: Args = Args.EMPTY): Lazy<T> =
+    lazyGet(TypeIdentifier(T::class), args)
 
-inline fun <reified T : ViewModel> Fragment.lazyViewModel(args: Args = Args.EMPTY): Lazy<T> =
-    lazy { viewModel(args) }
+inline fun <reified T : ViewModel> Fragment.lazyGetVm(args: Args = Args.EMPTY): Lazy<T> =
+    lazy { getVm(args) }
 
-inline fun <reified T : ViewModel> Fragment.viewModel(args: Args = Args.EMPTY): T {
+inline fun <reified T : ViewModel> Fragment.getVm(args: Args = Args.EMPTY): T {
     return when (this) {
-        is HasContainer -> container.viewModel(this, args)
-        else -> requireActivity().viewModel(args)
+        is HasContainer -> container.getVm(this, args)
+        else -> requireActivity().getVm(args)
     }
 }

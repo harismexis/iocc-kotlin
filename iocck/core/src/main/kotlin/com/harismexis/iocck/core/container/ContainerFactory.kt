@@ -1,9 +1,8 @@
 package com.harismexis.iocck.core.container
 
+import com.harismexis.iocck.core.alias.ContainerFactory
 import com.harismexis.iocck.core.module.ModuleFactory
 import com.harismexis.iocck.core.module.Module
-
-typealias ContainerFactory = Container.Builder.() -> Unit
 
 fun buildContainer(factory: ContainerFactory): Container {
     val builder = Container.Builder()
@@ -14,5 +13,5 @@ fun buildContainer(factory: ContainerFactory): Container {
 fun Container.Builder.module(moduleFactory: ModuleFactory) {
     val module = Module()
     moduleFactory(module)
-    withModule(module)
+    addModule(module)
 }

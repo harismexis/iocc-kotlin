@@ -4,9 +4,9 @@ import com.harismexis.iocck.core.identifier.Identifier
 import java.lang.RuntimeException
 
 class DependencyNotFoundException(identifier: Identifier) :
-    RuntimeException("Dependency for qualifier $identifier not found")
+    RuntimeException("Dependency for $identifier not found")
 
-class DependencyConflictException(identifier: Identifier) :
-    RuntimeException("There is already one dependency registered for qualifier = $identifier")
+class DependencyExistsException(identifier: Identifier) :
+    RuntimeException("Dependency already exists for $identifier")
 
-class UnknownArgException : RuntimeException("Unknown Parameter")
+class UnknownArgException : RuntimeException("Unknown argument")

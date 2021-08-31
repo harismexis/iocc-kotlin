@@ -12,10 +12,10 @@ fun <T> HasContainer.get(
 inline fun <reified T> HasContainer.get(args: Args = Args.EMPTY) =
     container.get<T>(TypeIdentifier(T::class), args)
 
-inline fun <reified T> HasContainer.lazyInjection(args: Args = Args.EMPTY) =
-    container.lazyInjection<T>(args)
+inline fun <reified T> HasContainer.lazyGet(args: Args = Args.EMPTY) =
+    container.lazyGet<T>(args)
 
-inline fun <reified T> HasContainer.lazyInjection(
+inline fun <reified T> HasContainer.lazyGet(
     identifier: Identifier,
     args: Args = Args.EMPTY
-) = container.lazyInjection<T>(args)
+) = container.lazyGet<T>(args)

@@ -7,7 +7,7 @@ class DependencyMap {
     private val map = HashMap<Identifier, Provider<*>>()
 
     fun put(identifier: Identifier, provider: Provider<*>) {
-        if (map.contains(identifier)) throw DependencyConflictException(identifier)
+        if (map.contains(identifier)) throw DependencyExistsException(identifier)
         map[identifier] = provider
     }
 
