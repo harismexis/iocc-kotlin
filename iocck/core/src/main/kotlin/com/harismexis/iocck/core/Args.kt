@@ -12,7 +12,7 @@ open class Args(val args: Array<out Any>) {
         ?: throw UnknownArgException()
 
     companion object {
-        val EMPTY = Args(emptyArray())
+        val NO_ARGS = Args(emptyArray())
         fun create(vararg args: Any) = Args(args)
     }
 }

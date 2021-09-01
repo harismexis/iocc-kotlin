@@ -8,7 +8,7 @@ import com.harismexis.iocck.core.container.Container
 
 inline fun <reified T : ViewModel> Container.getVm(
     viewModelStoreOwner: ViewModelStoreOwner,
-    args: Args = Args.EMPTY
+    args: Args = Args.NO_ARGS
 ): T {
     return get(ViewModelArgs(viewModelStoreOwner, args.args.toList().toTypedArray()))
 }

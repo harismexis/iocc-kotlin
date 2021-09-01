@@ -1,6 +1,6 @@
 package com.harismexis.iocck.core.module
 
-typealias ModuleFactory = Module.() -> Unit
+import com.harismexis.iocck.core.ModuleFactory
 
 fun module(factory: ModuleFactory) = module(emptyArray(), factory)
 

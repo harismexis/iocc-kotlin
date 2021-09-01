@@ -21,28 +21,28 @@ fun Activity.getContainer(): Container {
 
 fun <T> Activity.get(
     identifier: Identifier,
-    args: Args = Args.EMPTY
+    args: Args = Args.NO_ARGS
 ): T {
     return getContainer().get(identifier, args)
 }
 
 fun <T> Activity.lazyGet(
     identifier: Identifier,
-    args: Args = Args.EMPTY
+    args: Args = Args.NO_ARGS
 ): Lazy<T> = lazy {
     get(identifier, args)
 }
 
-inline fun <reified T> Activity.get(args: Args = Args.EMPTY): T = get(
+inline fun <reified T> Activity.get(args: Args = Args.NO_ARGS): T = get(
     TypeIdentifier(T::class), args
 )
 
-inline fun <reified T> Activity.lazyGet(args: Args = Args.EMPTY): Lazy<T> =
+inline fun <reified T> Activity.lazyGet(args: Args = Args.NO_ARGS): Lazy<T> =
     this.lazyGet(TypeIdentifier(T::class), args)
 
-inline fun <reified T : ViewModel> ComponentActivity.lazyGetVm(args: Args = Args.EMPTY): Lazy<T> =
+inline fun <reified T : ViewModel> ComponentActivity.lazyGetVm(args: Args = Args.NO_ARGS): Lazy<T> =
     lazy { getVm(args) }
 
-inline fun <reified T : ViewModel> ComponentActivity.getVm(args: Args = Args.EMPTY): T {
+inline fun <reified T : ViewModel> ComponentActivity.getVm(args: Args = Args.NO_ARGS): T {
     return getContainer().getVm(this, args)
 }

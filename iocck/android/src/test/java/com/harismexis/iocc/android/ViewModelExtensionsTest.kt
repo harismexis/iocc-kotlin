@@ -8,7 +8,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test
-import com.harismexis.iocc.android.extensions.getVm
+import com.harismexis.iocc.android.extensions.registerVm
 import com.harismexis.iocck.core.container.Container
 import com.harismexis.iocck.core.container.HasContainer
 import com.harismexis.iocck.core.container.buildContainer
@@ -22,7 +22,7 @@ class ViewModelExtensionsTest {
         // given
         val container = buildContainer {
             module {
-                getVm { Vm() }
+                registerVm { Vm() }
             }
         }
 

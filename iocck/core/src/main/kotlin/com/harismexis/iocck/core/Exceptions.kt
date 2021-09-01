@@ -6,7 +6,7 @@ import java.lang.RuntimeException
 class DependencyNotFoundException(identifier: Identifier) :
     RuntimeException("Dependency for $identifier not found")
 
-class DependencyExistsException(identifier: Identifier) :
-    RuntimeException("Dependency already exists for $identifier")
+class DependencyDuplicationException(identifier: Identifier) :
+    RuntimeException("Dependency duplication for $identifier")
 
 class UnknownArgException : RuntimeException("Unknown argument")

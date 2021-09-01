@@ -6,6 +6,7 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.Test
 import com.harismexis.iocc.android.extensions.getVm
+import com.harismexis.iocc.android.extensions.registerVm
 import com.harismexis.iocck.core.container.buildContainer
 import com.harismexis.iocck.core.container.module
 import org.junit.Assert
@@ -20,7 +21,7 @@ class ViewModelProviderTest {
         }
         val container = buildContainer {
             module {
-                getVm { Vm() }
+                registerVm { Vm() }
             }
         }
 
@@ -42,7 +43,7 @@ class ViewModelProviderTest {
         }
         val container = buildContainer {
             module {
-                getVm { Vm() }
+                registerVm { Vm() }
             }
         }
 

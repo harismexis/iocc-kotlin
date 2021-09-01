@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.harismexis.iocc.android.exception.VmArgsMissingException
 import com.harismexis.iocck.core.module.Module
 import com.harismexis.iocck.core.Args
-import com.harismexis.iocck.core.provider.Provider
+import com.harismexis.iocck.core.provider.InstanceProvider
 
 typealias ViewModelInstanceFactory<T> = Module.(ViewModelArgs) -> T
 
 class ViewModelDependencyProvider<T : ViewModel>(
     private val module: Module,
     private val factory: ViewModelInstanceFactory<T>
-) : Provider<T> {
+) : InstanceProvider<T> {
 
     override fun get(args: Args): T {
         val vmArgs = args as? ViewModelArgs ?: throw VmArgsMissingException()

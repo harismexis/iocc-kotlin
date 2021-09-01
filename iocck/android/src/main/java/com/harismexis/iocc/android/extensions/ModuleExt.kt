@@ -13,7 +13,7 @@ inline fun <reified T : ViewModel> Module.getVm(
     register(identifier, ViewModelDependencyProvider(this, factory))
 }
 
-inline fun <reified T : ViewModel> Module.getVm(
+inline fun <reified T : ViewModel> Module.registerVm(
     noinline factory: ViewModelInstanceFactory<T>
 ) {
     register(ViewModelDependencyProvider(this, factory))

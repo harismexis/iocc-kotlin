@@ -1,7 +1,9 @@
 package com.harismexis.iocck.module
 
 import com.harismexis.iocck.core.Args
-import com.harismexis.iocck.core.DependencyExistsException
+import com.harismexis.iocck.core.DependencyDuplicationException
+import com.harismexis.iocck.core.module.factory
+import com.harismexis.iocck.core.module.singleton
 import com.harismexis.iocck.core.module.Module
 import com.harismexis.iocck.core.provider.Singleton
 import com.harismexis.iocck.core.module.module
@@ -12,26 +14,24 @@ import org.junit.Test
 class ModuleTest {
 
     @Test
-    fun `Module registration should base on specified qualifier`() {
+    fun `Expected arguments are retrieved from dependency`() {
         // given
-        val module = Module()
-        val dev1 = Developer()
-        val dev2 = Developer()
-
-        val sing1 = Singleton(module) { dev1 }
-        val sing2 = Singleton(module) { dev2 }
+        val expectedSalary = 60
+        val module = module {
+            factory<Employee> { (salary: Int) ->
+                Manager(salary)
+            }
+        }
 
         // when
-        module.register<Employee>(sing1)
-        module.register(sing2)
+        val emp: Employee = module.get(Args.create(expectedSalary))
 
         // then
-        Assert.assertEquals(module.require<Employee>().get(), dev1)
-        Assert.assertEquals(module.require<Developer>().get(), dev2)
+        Assert.assertEquals(emp.salary, expectedSalary)
     }
 
-    @Test(expected = DependencyExistsException::class)
-    fun `Should throw Exception on dependency duplication`() {
+    @Test(expected = DependencyDuplicationException::class)
+    fun `Should throw Exception for duplicated dependency`() {
         // given
         val module = Module()
 
@@ -41,7 +41,23 @@ class ModuleTest {
     }
 
     @Test
-    fun `Related dependencies should be available during registration`() {
+    fun `Module retrieves dependency according to type`() {
+        // given
+        val module = Module()
+        val dev1 = Developer()
+        val dev2 = Developer()
+
+        // when
+        module.register<Employee>(Singleton(module) { dev1 })
+        module.register(Singleton(module) { dev2 })
+
+        // then
+        Assert.assertEquals(module.get<Employee>(), dev1)
+        Assert.assertEquals(module.get<Developer>(), dev2)
+    }
+
+    @Test
+    fun `Class gets required dependencies`() {
         // given
         val man = Manager()
         val dev = Developer()
@@ -60,9 +76,7 @@ class ModuleTest {
                 Company(listOf(man, dev, rec))
             }
         }
-        val company: Company = module
-            .require<Company>()
-            .get()
+        val company: Company = module.get()
 
         // then
         Assert.assertTrue(company.employees.contains(man))
@@ -71,50 +85,29 @@ class ModuleTest {
     }
 
     @Test
-    fun `Related modules should be used to return dependency`() {
+    fun `Module should find dependency from dependsOn`() {
         // given
-        val car = Manager()
-        val bike = Developer()
+        val man = Manager()
+        val dev = Developer()
 
         // when
-        val vehiclesModule = module {
-            singleton { car }
-            singleton { bike }
+        val modSquad = module {
+            singleton { man }
+            singleton { dev }
         }
 
-        val garageModule = module(dependsOn = arrayOf(vehiclesModule)) {
+        val modCompany = module(dependsOn = arrayOf(modSquad)) {
             singleton {
-                val car: Manager = get()
-                val bike: Developer = get()
-                Company(listOf(car, bike))
+                val man: Manager = get()
+                val dev: Developer = get()
+                Company(listOf(man, dev))
             }
         }
-        val company: Company = garageModule
-            .require<Company>()
-            .get()
+        val company: Company = modCompany.get()
 
         // then
-        Assert.assertTrue(company.employees.contains(car))
-        Assert.assertTrue(company.employees.contains(bike))
-    }
-
-    @Test
-    fun `Provider parameters should be used to create dependency`() {
-        // given
-        val expectedSalary = 60
-        val module = module {
-            factory<Employee> { (salary: Int) ->
-                Manager(salary)
-            }
-        }
-
-        // when
-        val employee = module
-            .require<Employee>()
-            .get(Args.create(expectedSalary))
-
-        // then
-        Assert.assertEquals(employee.salary, expectedSalary)
+        Assert.assertTrue(company.employees.contains(man))
+        Assert.assertTrue(company.employees.contains(dev))
     }
 
 }
