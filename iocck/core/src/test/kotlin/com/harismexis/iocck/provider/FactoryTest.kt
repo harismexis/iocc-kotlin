@@ -9,7 +9,7 @@ import org.junit.Test
 class FactoryTest {
 
     @Test
-    fun `Factory should return always new instance`() {
+    fun `Factory should return always new object`() {
         // given
         val module = Module()
         val provider = Factory(module) { Manager(50) }
@@ -21,4 +21,5 @@ class FactoryTest {
         // then
         Assert.assertNotEquals(obj1, obj2)
     }
+
 }

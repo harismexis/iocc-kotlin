@@ -9,7 +9,7 @@ import org.junit.Test
 class SingletonTest {
 
     @Test
-    fun `Singleton should return always same instance`() {
+    fun `Singleton should return always same object`() {
         // given
         val module = Module()
         val provider = Singleton(module) { Recruiter(50) }

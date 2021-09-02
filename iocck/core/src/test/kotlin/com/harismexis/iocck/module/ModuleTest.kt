@@ -1,12 +1,13 @@
 package com.harismexis.iocck.module
 
 import com.harismexis.iocck.core.Args
-import com.harismexis.iocck.core.DependencyDuplicationException
+import com.harismexis.iocck.core.exception.DependencyDuplicationException
 import com.harismexis.iocck.core.module.factory
 import com.harismexis.iocck.core.module.singleton
 import com.harismexis.iocck.core.module.Module
 import com.harismexis.iocck.core.provider.Singleton
 import com.harismexis.iocck.core.module.module
+import com.harismexis.iocck.core.provider.Factory
 import com.harismexis.iocck.util.*
 import org.junit.Assert
 import org.junit.Test
@@ -30,16 +31,6 @@ class ModuleTest {
         Assert.assertEquals(emp.salary, expectedSalary)
     }
 
-    @Test(expected = DependencyDuplicationException::class)
-    fun `Should throw Exception for duplicated dependency`() {
-        // given
-        val module = Module()
-
-        // when
-        module.register(Singleton<Employee>(module) { Developer() })
-        module.register(Singleton<Employee>(module) { Developer() })
-    }
-
     @Test
     fun `Module retrieves dependency according to type`() {
         // given
@@ -57,7 +48,7 @@ class ModuleTest {
     }
 
     @Test
-    fun `Class gets required dependencies`() {
+    fun `Dependencies are found in same module`() {
         // given
         val man = Manager()
         val dev = Developer()
@@ -85,7 +76,7 @@ class ModuleTest {
     }
 
     @Test
-    fun `Module should find dependency from dependsOn`() {
+    fun `Dependencies are found in dependsOn modules`() {
         // given
         val man = Manager()
         val dev = Developer()
@@ -108,6 +99,36 @@ class ModuleTest {
         // then
         Assert.assertTrue(company.employees.contains(man))
         Assert.assertTrue(company.employees.contains(dev))
+    }
+
+    @Test(expected = DependencyDuplicationException::class)
+    fun `Throws Duplication Exception when register same Singleton`() {
+        // given
+        val module = Module()
+
+        // when
+        module.register(Singleton<Employee>(module) { Developer() })
+        module.register(Singleton<Employee>(module) { Developer() })
+    }
+
+    @Test(expected = DependencyDuplicationException::class)
+    fun `Throws Duplication Exception when register same class with Factory & Singleton`() {
+        // given
+        val module = Module()
+
+        // when
+        module.register(Singleton<Employee>(module) { Manager() })
+        module.register(Factory<Employee>(module) { Manager() })
+    }
+
+    @Test(expected = DependencyDuplicationException::class)
+    fun `Throws Duplication Exception when register same Factory`() {
+        // given
+        val module = Module()
+
+        // when
+        module.register(Factory<Employee>(module) { Recruiter() })
+        module.register(Factory<Employee>(module) { Recruiter() })
     }
 
 }

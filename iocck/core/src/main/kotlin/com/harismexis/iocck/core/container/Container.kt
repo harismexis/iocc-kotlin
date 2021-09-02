@@ -1,7 +1,7 @@
 package com.harismexis.iocck.core.container
 
-import com.harismexis.iocck.core.DependencyNotFoundException
-import com.harismexis.iocck.core.DependencyDuplicationException
+import com.harismexis.iocck.core.exception.DependencyNotFoundException
+import com.harismexis.iocck.core.exception.DependencyDuplicationException
 import com.harismexis.iocck.core.Args
 import com.harismexis.iocck.core.module.Module
 import com.harismexis.iocck.core.identifier.Identifier

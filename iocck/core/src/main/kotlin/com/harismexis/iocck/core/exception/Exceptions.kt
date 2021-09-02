@@ -1,4 +1,4 @@
-package com.harismexis.iocck.core
+package com.harismexis.iocck.core.exception
 
 import com.harismexis.iocck.core.identifier.Identifier
 import java.lang.RuntimeException

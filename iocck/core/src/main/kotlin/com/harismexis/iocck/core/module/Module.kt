@@ -1,12 +1,11 @@
 package com.harismexis.iocck.core.module
 
 import com.harismexis.iocck.core.Args
-import com.harismexis.iocck.core.DependencyDuplicationException
-import com.harismexis.iocck.core.DependencyNotFoundException
+import com.harismexis.iocck.core.exception.DependencyDuplicationException
+import com.harismexis.iocck.core.exception.DependencyNotFoundException
 import com.harismexis.iocck.core.identifier.Identifier
 import com.harismexis.iocck.core.identifier.TypeIdentifier
 import com.harismexis.iocck.core.provider.InstanceProvider
-import java.util.*
 
 class Module(private val dependsOn: List<Module> = emptyList()) {
 

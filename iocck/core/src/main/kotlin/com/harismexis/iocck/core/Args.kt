@@ -1,5 +1,7 @@
 package com.harismexis.iocck.core
 
+import com.harismexis.iocck.core.exception.UnknownArgException
+
 open class Args(val args: Array<out Any>) {
 
     inline operator fun <reified T> component1(): T = requireAt(0)

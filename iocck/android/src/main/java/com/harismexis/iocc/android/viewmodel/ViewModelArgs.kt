@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.harismexis.iocck.core.Args
 
 class ViewModelArgs(
-    val viewModelStoreOwner: ViewModelStoreOwner,
+    val storeOwner: ViewModelStoreOwner,
     args: Array<Any>
 ) : Args(args)

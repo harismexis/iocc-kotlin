@@ -3,19 +3,18 @@ plugins {
     id 'kotlin-android'
 }
 
-apply from: "${rootProject.rootDir}/versions.gradle"
+apply from: "${rootProject.rootDir}/buildsystem/config.gradle"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "v${versions.iocck}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
