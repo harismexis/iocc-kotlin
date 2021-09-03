@@ -7,7 +7,7 @@ import com.harismexis.iocc.android.extensions.lazyGetVm
 import com.harismexis.iocck.demo.databinding.ActivityMainBinding
 import com.harismexis.iocck.demo.dependencies.Logger
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private val logger: Logger by lazyGet()
     private val homeVm: HomeViewModel by lazyGetVm()
@@ -19,5 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.tv1.text = homeVm.msg()
         binding.tv2.text = homeVm.hello()
+        logger.log()
     }
 }

@@ -5,7 +5,8 @@ import com.harismexis.iocck.demo.dependencies.Repository
 
 class HomeViewModel(
     private val repository: Repository,
-    val msg: String) : ViewModel() {
+    private val msg: String
+) : ViewModel() {
 
     fun msg(): String {
         return msg

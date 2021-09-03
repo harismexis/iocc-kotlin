@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.harismexis.iocck.demo"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
@@ -24,6 +24,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -32,20 +37,13 @@ android {
         viewBinding true
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
     implementation project(':iocck:core')
     implementation project(':iocck:android')
     implementation libraries.values()
-
     debugImplementation librariesDebug.values()
-
     testImplementation testLibraries.values()
-
     androidTestImplementation androidTestLibraries.values()
 }

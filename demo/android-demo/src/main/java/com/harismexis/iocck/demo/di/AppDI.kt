@@ -12,6 +12,7 @@ object AppDI {
 
     private val mainModule = module {
         // Register Singleton
+        singleton { Logger() }
         singleton { Repository() }
         // register( Singleton(this) { Repository() })
         // register(TypeIdentifier(Repository::class), Singleton(this) { Repository() })

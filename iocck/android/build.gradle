@@ -3,17 +3,15 @@ plugins {
     id 'kotlin-android'
 }
 
-apply from: "${rootProject.rootDir}/buildsystem/config.gradle"
-
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
-        versionName "v${versions.iocck}"
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,8 +36,6 @@ dependencies {
     implementation libraries.core_ktx
     implementation libraries.app_compat
     implementation libraries.material
-
     debugImplementation librariesDebug.values()
-
     testImplementation testLibraries.values()
 }
