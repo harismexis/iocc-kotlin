@@ -12,6 +12,5 @@ java {
 
 dependencies {
     implementation libraries.kotlin
-
     testImplementation testLibraries.junit
 }
