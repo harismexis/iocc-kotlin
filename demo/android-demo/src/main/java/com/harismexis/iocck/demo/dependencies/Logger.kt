@@ -6,8 +6,4 @@ class Logger {
         print("Logger hash code: ${hashCode()}")
     }
 
-    override fun toString(): String {
-        return "Logger hash code: ${hashCode()}"
-    }
-
 }

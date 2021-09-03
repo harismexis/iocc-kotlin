@@ -61,10 +61,10 @@ class ModuleTest {
             singleton { rec }
 
             factory {
-                val man: Manager = get()
-                val dev: Developer = get()
-                val rec: Recruiter = get()
-                Company(listOf(man, dev, rec))
+                val manager: Manager = get()
+                val developer: Developer = get()
+                val recruiter: Recruiter = get()
+                Company(listOf(manager, developer, recruiter))
             }
         }
         val company: Company = module.get()
@@ -89,9 +89,9 @@ class ModuleTest {
 
         val modCompany = module(dependsOn = arrayOf(modSquad)) {
             singleton {
-                val man: Manager = get()
-                val dev: Developer = get()
-                Company(listOf(man, dev))
+                val manager: Manager = get()
+                val developer: Developer = get()
+                Company(listOf(manager, developer))
             }
         }
         val company: Company = modCompany.get()
